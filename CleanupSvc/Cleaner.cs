@@ -47,10 +47,11 @@ namespace CleanupSvc
 					//potentially not empty
 					foreach (var subitem in item.GetDirectories())
 						deleteDirectory(now, subitem, antique, problems);
-
-					item.Refresh();
-					if (mustDeleteDirectory(now, item, antique))
-						item.Delete();
+				}
+				try { item.Delete(); return; }
+				catch (IOException ex)
+				{
+					problems.AppendFormat("\nexception (deleting directory): {0}\t{1}", ex.Message, item);
 				}
 			}
 		}
