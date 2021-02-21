@@ -31,7 +31,7 @@ jobs:
       
     - name: Print hashes
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: dir ./CleanupSvc/bin/${{env.BUILD_CONFIGURATION}} -Iclude *.* | Get-FileHash | select Hash,Path | Format-List
+      run: dir ./CleanupSvc/bin/${{env.BUILD_CONFIGURATION}} -Include *.* | Get-FileHash | select Hash,Path | Format-List
 
     - name: Archiving
       working-directory: ${{env.GITHUB_WORKSPACE}}/CleanupSvc/bin
