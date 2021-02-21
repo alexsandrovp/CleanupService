@@ -31,15 +31,11 @@ jobs:
       
     - name: Print hashes
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: dir CleanupSvc/bin/${{env.BUILD_CONFIGURATION}} -Include *.* | Get-FileHash | select Hash,Path | Format-List
-
-    - name: Archiving
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: Compress-Archive -Path CleanupSvc/bin/${{env.BUILD_CONFIGURATION}} -DestinationPath CleanupService.zip
+      run: Get-FileHash CleanupSvc/bin/${{env.BUILD_CONFIGURATION}}/* | select Hash,Path | Format-List
     
     - name: 'Upload zip'
       uses: actions/upload-artifact@v2
       with:
-        name: CleanupService.zip
-        path: CleanupService.zip
+        name: CleanupService
+        path: CleanupSvc/bin/${{env.BUILD_CONFIGURATION}}
         retention-days: 1
