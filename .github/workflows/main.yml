@@ -31,11 +31,11 @@ jobs:
       
     - name: Print hashes
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: dir ${{env.GITHUB_WORKSPACE}}/CleanupSvc/bin/${{env.BUILD_CONFIGURATION}} -Include *.* | Get-FileHash | select Hash,Path | Format-List
+      run: dir CleanupSvc/bin/${{env.BUILD_CONFIGURATION}} -Include *.* | Get-FileHash | select Hash,Path | Format-List
 
     - name: Archiving
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: Compress-Archive -Path ${{env.GITHUB_WORKSPACE}}/CleanupSvc/bin/${{env.BUILD_CONFIGURATION}} -DestinationPath CleanupService.zip
+      run: Compress-Archive -Path CleanupSvc/bin/${{env.BUILD_CONFIGURATION}} -DestinationPath CleanupService.zip
     
     - name: 'Upload zip'
       uses: actions/upload-artifact@v2
